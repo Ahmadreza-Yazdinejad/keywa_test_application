@@ -15,6 +15,7 @@ class CryptoRemoteRepository extends ICryptoRepository {
   Future<Either<String, List<Crypto>>> cryptoList() async {
     try {
       var response = await _dataSoruce.cryptoList();
+
       return right(response);
     } on ApiException {
       return left('un known Error');

@@ -15,30 +15,36 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocBuilder<HomeBloc, HomeState>(
-        builder: (context, state) {
-          return RefreshIndicator(
-            onRefresh: () async {
-              context.read<HomeBloc>().add(
-                    HomeFetchDateEvent(),
-                  );
-            },
-            child: _getHomeScreenContent(state),
-          );
-        },
+    return SafeArea(
+      child: Scaffold(
+        body: BlocBuilder<HomeBloc, HomeState>(
+          builder: (context, state) {
+            return RefreshIndicator(
+              onRefresh: () async {
+                context.read<HomeBloc>().add(
+                      HomeFetchDateEvent(),
+                    );
+              },
+              child: _getHomeScreenContent(state, context),
+            );
+          },
+        ),
       ),
     );
   }
 }
 
-Widget _getHomeScreenContent(HomeState state) {
+Widget _getHomeScreenContent(HomeState state, BuildContext context) {
   if (state is HomeLoading) {
     return const Center(child: RefreshProgressIndicator());
   } else if (state is HomeFetchDataState) {
     return state.cryptoList!.fold(
       (errorMessage) {
-        return Center(child: Text(errorMessage));
+        return Center(
+            child: Text(
+          errorMessage,
+          style: Theme.of(context).textTheme.bodyMedium,
+        ));
       },
       (cryptoList) {
         return CryptoListTile(

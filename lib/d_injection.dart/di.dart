@@ -6,22 +6,34 @@ import 'package:keywa_test_application/data/repository/crypto_list_repository.da
 
 var locator = GetIt.instance;
 void initLocator() {
+  _component();
+  _repository();
+  _dataSource();
+}
+
+void _dataSource() {
+  locator.registerFactory<ICryptoDataSoruce>(
+    () => CryptoRemoteDataSource(
+      locator.get(),
+    ),
+  );
+}
+
+void _repository() {
+  locator.registerFactory<ICryptoRepository>(
+    () => CryptoRemoteRepository(
+      locator.get(),
+    ),
+  );
+}
+
+void _component() {
   locator.registerFactory<Dio>(
     () => Dio(
       BaseOptions(baseUrl: 'https://api.coincap.io/v2/assets'),
     ),
   );
 
-  locator.registerFactory<ICryptoDataSoruce>(
-    () => CryptoRemoteDataSource(
-      locator.get(),
-    ),
-  );
-  locator.registerFactory<ICryptoRepository>(
-    () => CryptoRemoteRepository(
-      locator.get(),
-    ),
-  );
   locator.registerFactory<HomeBloc>(
     () => HomeBloc(
       locator.get(),
