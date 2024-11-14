@@ -8,12 +8,8 @@ ThemeData theme = ThemeData(
       color: CustomColor.grey,
     ),
     bodyMedium: TextStyle(
-      fontSize: 16,
-      color: CustomColor.blueAccent,
-      fontWeight: FontWeight.w600,
-    ),
-    bodyLarge: TextStyle(
       fontSize: 18,
+      color: CustomColor.white,
       fontWeight: FontWeight.bold,
     ),
   ),

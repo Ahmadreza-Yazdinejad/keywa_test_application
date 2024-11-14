@@ -12,11 +12,11 @@ class CryptoRemoteDataSource extends ICryptoDataSoruce {
   @override
   Future<List<Crypto>> cryptoList() async {
     try {
-      var response = await _dio.get('');
-      var res = response.data['data']
-          .map<Crypto>((jsonMapObject) => Crypto.fromMapJson(jsonMapObject))
+      var response = await _dio.get('/data/top/mktcapfull?limit=10&tsym=USD');
+      final cryptoList = response.data['Data']
+          .map<Crypto>((data) => Crypto.fromJson(data))
           .toList();
-      return res;
+      return cryptoList;
     } on DioException catch (ex) {
       throw ApiException(
           errorMessage: ex.response?.data['message'],

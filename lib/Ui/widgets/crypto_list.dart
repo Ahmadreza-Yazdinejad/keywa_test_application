@@ -14,31 +14,26 @@ class CryptoListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
 
-    return ListView.builder(
-      itemCount: mainCryptoList.length,
-      itemBuilder: (context, index) {
-        final crypto = mainCryptoList[index];
+    return SizedBox(
+      height: 300,
+      child: ListView.builder(
+        physics: const BouncingScrollPhysics(),
+        itemCount: mainCryptoList.length,
+        itemBuilder: (context, index) {
+          final crypto = mainCryptoList[index];
 
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-          child: Card(
-            elevation: 3,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
             child: ListTile(
               leading: CircleAvatar(
-                backgroundColor: CustomColor.blueAccent,
-                child: Text(
-                  '${crypto.rank}',
-                  style: textTheme.bodyLarge?.copyWith(
-                    color: CustomColor.white,
-                  ),
+                child: FittedBox(
+                  fit: BoxFit.cover,
+                  child: Image.network(mainCryptoList[index].imageUrl),
                 ),
               ),
               title: Text(
                 crypto.name,
-                style: textTheme.bodyLarge,
+                style: textTheme.bodyLarge!.copyWith(color: CustomColor.white),
               ),
               subtitle: Text(
                 crypto.symbol,
@@ -49,24 +44,28 @@ class CryptoListTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    '\$${double.parse(crypto.priceUsd.toString()).toStringAsFixed(2)}',
-                    style: textTheme.bodyMedium,
+                    crypto.price,
+                    style: textTheme.bodyLarge!.copyWith(
+                      color: crypto.change24Hour.contains('-')
+                          ? CustomColor.red
+                          : CustomColor.green,
+                    ),
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    '${crypto.changePercent24hr.toStringAsFixed(2)}%',
+                    '${crypto.change24Hour}%',
                     style: textTheme.bodySmall?.copyWith(
-                      color: crypto.changePercent24hr > 0
-                          ? CustomColor.green
-                          : CustomColor.red,
+                      color: crypto.change24Hour.contains('-')
+                          ? CustomColor.red
+                          : CustomColor.green,
                     ),
                   ),
                 ],
               ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

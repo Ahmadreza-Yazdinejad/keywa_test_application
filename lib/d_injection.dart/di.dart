@@ -30,7 +30,7 @@ void _repository() {
 void _component() {
   locator.registerFactory<Dio>(
     () => Dio(
-      BaseOptions(baseUrl: 'https://api.coincap.io/v2/assets'),
+      BaseOptions(baseUrl: 'https://min-api.cryptocompare.com'),
     ),
   );
 
