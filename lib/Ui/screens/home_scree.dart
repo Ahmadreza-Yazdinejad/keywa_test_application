@@ -72,30 +72,28 @@ class MainContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          const SizedBox(height: 50),
-          const HeaderImage(),
-          const SizedBox(height: 40),
-          const WalletOptions(),
-          const SizedBox(height: 40),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30.0),
-            child: Text(
-              'رمز ارز های برتر',
-              textAlign: TextAlign.right,
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        const SizedBox(height: 50),
+        const HeaderImage(),
+        const SizedBox(height: 40),
+        const WalletOptions(),
+        const SizedBox(height: 40),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30.0),
+          child: Text(
+            'رمز ارز های برتر',
+            textAlign: TextAlign.right,
+            style: Theme.of(context).textTheme.bodyMedium,
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 28.0),
-            child: Divider(),
-          ),
-          Expanded(child: CryptoListTile(mainCryptoList: cryptoList)),
-        ],
-      ),
+        ),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 28.0),
+          child: Divider(),
+        ),
+        Expanded(child: CryptoListTile(mainCryptoList: cryptoList)),
+      ],
     );
   }
 }
