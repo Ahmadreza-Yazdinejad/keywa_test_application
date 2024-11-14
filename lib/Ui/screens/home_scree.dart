@@ -93,7 +93,7 @@ class MainContent extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 28.0),
             child: Divider(),
           ),
-          CryptoListTile(mainCryptoList: cryptoList),
+          Expanded(child: CryptoListTile(mainCryptoList: cryptoList)),
         ],
       ),
     );
