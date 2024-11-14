@@ -15,7 +15,7 @@ class CryptoListTile extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
 
     return SizedBox(
-      height: 300,
+      height: 350,
       child: ListView.builder(
         physics: const BouncingScrollPhysics(),
         itemCount: mainCryptoList.length,
